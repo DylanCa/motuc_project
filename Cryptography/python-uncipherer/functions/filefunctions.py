@@ -12,5 +12,3 @@ class FileFunction():
         return [
             word.strip('\n') for word in f if len(word.replace('\n', '')) == 6
         ]
-
-
