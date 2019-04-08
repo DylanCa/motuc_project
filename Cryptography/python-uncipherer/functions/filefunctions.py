@@ -1,12 +1,16 @@
+import codecs
+
 class FileFunction():
     filepath = ''
 
     def __init__(self, filepath):
         self.filepath = filepath
 
-    def openfile(self, encoding="utf-8"):
-        f = open(self.filepath, encoding=encoding)
-        return f.readlines()
+    def openfile(self, encoding="UTF-8"):
+        f = codecs.open(self.filepath, "r", encoding)
+        fr = f.read()
+        f.close()
+        return fr
 
     def return6charwordsfromfile(self, f):
         return [

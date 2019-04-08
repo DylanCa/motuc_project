@@ -46,6 +46,3 @@ def recursivewordcheck(password=""):
 
 
 recursivewordcheck()
-
-# for x in (''.join(i) for i in product(ascii_lowercase, repeat=5)):
-#     print(x)
