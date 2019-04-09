@@ -1,12 +1,9 @@
 from filefunctions import FileFunction
 from string import ascii_lowercase
-from collections import Counter
 
 import json
-import sys
-import unicodedata
 
-EncryptedFileFunctions = FileFunction("../encrypted_files/PB0.txt")
+EncryptedFileFunctions = FileFunction("PA.txt")
 encrypted_file = EncryptedFileFunctions.openfile()
 
 blocks = {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
@@ -46,5 +43,6 @@ for i, block in enumerate(blocks):
 
 frequencytab['finalkey'] = key
 
-# sys.stdout.write(json.dumps(frequencytab))
-sys.stdout.write(frequencytab['finalkey'])
+print(json.dumps(frequencytab))
+print("The decrypt key for this file is >>{}<<".format(
+    frequencytab['finalkey']))
