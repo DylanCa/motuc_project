@@ -6,7 +6,7 @@ from pathlib import Path
 class FileFunction():
     path = "../encrypted_files/"
     filepath = ''
-    encoding = "iso8859_1"
+    encoding = "latin_1"
 
     def __init__(self, filepath):
         self.filepath = self.path + filepath
@@ -27,3 +27,4 @@ class FileFunction():
         f = codecs.open(
             Path(self.filepath), "w", encoding=self.encoding, errors='ignore')
         f.write(text)
+        f.close()

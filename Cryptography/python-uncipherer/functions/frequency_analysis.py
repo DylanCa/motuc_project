@@ -1,5 +1,6 @@
 from functions.filefunctions import FileFunction
 from string import ascii_lowercase
+from itertools import cycle
 
 import json
 
@@ -12,18 +13,18 @@ class FrequencyAnalysis():
         EncryptedFileFunctions = FileFunction(filename)
         return EncryptedFileFunctions.openfile()
 
-    def analysefrequencyandgetkey(self, encrypted_file):
-        blocks = {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
-        frequencytab = {0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}}
-        keylength = int(input("Enter the size of the key to find ( MANDATORY !!! ): "))
-        while not isinstance(keylength, int):
-            keylength = input("Please enter a number only. Key size: ")
+    def analysefrequencyandgetkey(self, encrypted_file, keylength):
+        blocks, frequencytab = {}, {}
+
+        for x in range(0, keylength):
+            blocks[x] = []
+            frequencytab[x] = {}
 
         i = 0
 
-        for char in ''.join(encrypted_file):
-            blocks[i].append(char)
-            i = i + 1 if i < keylength - 1 else 0
+        for x, char in zip(
+                cycle(range(0, keylength)), ''.join(encrypted_file)):
+            blocks[x].append(char)
 
         highestEfreq = 0
         key = ""
