@@ -22,7 +22,7 @@ Starting from that, we decided to implement the Vernam Cipher using Python 3, an
 
 > This program has been tested with Ubuntu 18.04 and Windows 10 64-bits.
 
-You will need `Python 3` on your computer, as well as `pip`.
+You will need at least `Python 3.6` on your computer, as well as `pip`.
 
 
 ## Installation

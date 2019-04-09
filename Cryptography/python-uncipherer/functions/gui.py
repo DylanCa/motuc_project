@@ -87,7 +87,6 @@ class GUI(tkinter.Frame):
         self.filepath = easygui.fileopenbox()
         self.filename = self.filepath.split(os.sep)[-1]
 
-        print(self.filename, self.filepath)
         try:
             f = codecs.open(Path(self.filepath),
                             "r",
