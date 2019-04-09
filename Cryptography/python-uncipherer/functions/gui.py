@@ -4,6 +4,7 @@ from functions.decryptor import Decryptor
 import tkinter
 import easygui
 import codecs
+import os
 
 
 class GUI(tkinter.Frame):
@@ -20,8 +21,9 @@ class GUI(tkinter.Frame):
         self.frame_height = 400
 
         # Set configuration our frame
-        self.config(
-            width=self.frame_width, height=self.frame_height, bg=self.bgcolor)
+        self.config(width=self.frame_width,
+                    height=self.frame_height,
+                    bg=self.bgcolor)
         self.pack()
 
         # Create textBox for input data
@@ -29,16 +31,17 @@ class GUI(tkinter.Frame):
         self.encrypted_file.configure(state="disabled")
         self.encrypted_file.place(x=30, y=40, height=300, width=400)
 
-        label_encrypted_file = tkinter.Label(
-            text="Encrypted Text: ", bg=self.bgcolor)
+        label_encrypted_file = tkinter.Label(text="Encrypted Text: ",
+                                             bg=self.bgcolor)
         label_encrypted_file.place(x=30, y=20, height=15, width=120)
 
         self.encryptedtext = ''
         self.filename = ''
         self.filepath = ''
 
-        self.load_button = tkinter.Button(
-            master, text="Browse Files", command=self.openfile)
+        self.load_button = tkinter.Button(master,
+                                          text="Browse Files",
+                                          command=self.openfile)
         self.load_button.place(x=170, y=350)
 
         # Create textBox for result
@@ -46,16 +49,17 @@ class GUI(tkinter.Frame):
         self.decrypted_file.configure(state="disabled")
         self.decrypted_file.place(x=570, y=40, height=300, width=400)
 
-        label_decrypted_file = tkinter.Label(
-            text="Decrypted Text: ", bg=self.bgcolor)
+        label_decrypted_file = tkinter.Label(text="Decrypted Text: ",
+                                             bg=self.bgcolor)
         label_decrypted_file.place(x=570, y=20, height=15, width=120)
 
-        self.decrypt_button = tkinter.Button(
-            master, text="Decrypt File", command=self.decrypt)
+        self.decrypt_button = tkinter.Button(master,
+                                             text="Decrypt File",
+                                             command=self.decrypt)
         self.decrypt_button.place(x=710, y=350)
 
-        label_dropdown_menu = tkinter.Label(
-            text="Select an encoding: ", bg=self.bgcolor)
+        label_dropdown_menu = tkinter.Label(text="Select an encoding: ",
+                                            bg=self.bgcolor)
         label_dropdown_menu.place(x=435, y=50, height=15, width=130)
 
         self.encoding = tkinter.StringVar(master)
@@ -81,14 +85,14 @@ class GUI(tkinter.Frame):
 
     def openfile(self):
         self.filepath = easygui.fileopenbox()
-        self.filename = self.filepath.split('/')[-1]
+        self.filename = self.filepath.split(os.sep)[-1]
 
+        print(self.filename, self.filepath)
         try:
-            f = codecs.open(
-                Path(self.filepath),
-                "r",
-                encoding=self.encoding.get(),
-                errors='ignore')
+            f = codecs.open(Path(self.filepath),
+                            "r",
+                            encoding=self.encoding.get(),
+                            errors='ignore')
             self.encryptedtext = f.read()
 
             self.encrypted_file.configure(state="normal")
@@ -106,9 +110,9 @@ class GUI(tkinter.Frame):
 
     def decrypt(self):
         decrypted_text = Decryptor().decryptgui(self.filename,
-                                                 self.encryptedtext,
-                                                 self.key.get(),
-                                                 self.keysize.get())
+                                                self.encryptedtext,
+                                                self.key.get(),
+                                                self.keysize.get())
 
         self.decrypted_file.configure(state="normal")
         self.decrypted_file.delete('1.0', tkinter.END)
