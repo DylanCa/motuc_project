@@ -9,10 +9,12 @@ import time
 
 
 class Decryptor():
-    def __init__(self, *args, **kwargs):
-        return super().__init__(*args, **kwargs)
+    textfile = ''
+    key = ''
+    keysize = ''
+    filename = ''
 
-    def decrypt(self):
+    def decryptfile(self):
 
         path = "../encrypted_files"
 
@@ -95,3 +97,29 @@ class Decryptor():
         end = time.time()
         print("All files decrypted in {} seconds !".format(
             round(end - start, 2)))
+
+    def decryptmultiplefiles(self, files=[""]):
+        pass
+
+    def decrypttext(self, filename, textfile, key='', keysize=''):
+        if key is not '':
+            self.keysize = len(key)
+            self.key = key
+
+        else:
+            fa = FA()
+            self.keysize = keysize
+            self.key = fa.analysefrequencyandgetkey(textfile, int(self.keysize))
+
+        self.filename = filename
+        self.textfile = textfile
+
+        text = []
+        for char, keyletter in zip(self.textfile, cycle(self.key)):
+            text += chr(ord(char) ^ ord(keyletter))
+
+        WriteInFileFunctions = FileFunction("DECRYPTED/decrypted_" +
+                                            self.filename)
+        WriteInFileFunctions.writeinfile(''.join(text))
+
+        return [''.join(text), self.key, self.keysize]
