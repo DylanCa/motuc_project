@@ -29,7 +29,7 @@ You will need `Python 3` on your computer, as well as `pip`.
 
 - `git clone https://github.com/DylanCa/motuc_project.git`
 - `cd motuc_project/Cryptography/python-uncipherer`
-- `python3 -m pip install requirements.txt` - This will install 3 dependancies: `easygui`, `pick` and `windows-curses` (feel free to remove this line from the `requirements.txt` file if you are not on Windows).
+- `python3 -m pip install -f requirements.txt` - This will install 3 dependancies: `easygui`, `pick` and `windows-curses` (feel free to remove this line from the `requirements.txt` file if you are not on Windows).
 
 - Right after, from the same folder (**this is important, always launch the script from the `python-uncipherer` folder**), do a `python3 script.py` and voilà.
 
