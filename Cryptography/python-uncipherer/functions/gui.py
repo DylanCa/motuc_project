@@ -105,7 +105,7 @@ class GUI(tkinter.Frame):
             print("No file exists")
 
     def decrypt(self):
-        decrypted_text = Decryptor().decrypttext(self.filename,
+        decrypted_text = Decryptor().decryptgui(self.filename,
                                                  self.encryptedtext,
                                                  self.key.get(),
                                                  self.keysize.get())

@@ -14,7 +14,7 @@ class Decryptor():
     keysize = ''
     filename = ''
 
-    def decryptfile(self):
+    def decryptconsole(self):
 
         path = "../encrypted_files"
 
@@ -98,10 +98,7 @@ class Decryptor():
         print("All files decrypted in {} seconds !".format(
             round(end - start, 2)))
 
-    def decryptmultiplefiles(self, files=[""]):
-        pass
-
-    def decrypttext(self, filename, textfile, key='', keysize=''):
+    def decryptgui(self, filename, textfile, key='', keysize=''):
         if key is not '':
             self.keysize = len(key)
             self.key = key

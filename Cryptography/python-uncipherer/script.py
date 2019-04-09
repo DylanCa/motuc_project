@@ -16,7 +16,7 @@ options = ['Directly from the Console', 'Using the provided Python GUI']
 option, index = pick(options, title)
 
 if index == 0:
-    Decryptor().decrypt()
+    Decryptor().decryptconsole()
 
 elif index == 1:
     root = tkinter.Tk()
