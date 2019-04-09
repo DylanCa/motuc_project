@@ -1,19 +1,67 @@
-from filefunctions import FileFunction
+from functions.filefunctions import FileFunction
+from functions.frequency_analysis import FrequencyAnalysis as FA
+
 from itertools import cycle
+from os import walk
+
+import time
 
 
-# f = input("Enter the name of the file: ")
-# key = input("Enter the 6-char key, please: ")
+class Decryptor():
+    def __init__(self, *args, **kwargs):
+        return super().__init__(*args, **kwargs)
 
-f = 'PK.txt'
-key = "chfyjq"
+    def decrypt(self):
 
-EncryptedFileFunctions = FileFunction(f)
-encrypted_file = EncryptedFileFunctions.openfile()
-WriteInFileFunctions = FileFunction("decrypted_" + f)
+        path = "../encrypted_files"
 
-text = []
-for char, keyletter in zip(encrypted_file, cycle(key)):
-    text += chr( ord(char) ^ ord(keyletter))
+        textfiles = []
+        for (dirpath, dirnames, filenames) in walk(path):
+            textfiles.extend(filenames)
+            break
 
-decrypted_file = WriteInFileFunctions.writeinfile(''.join(text))
+        print("({}) Available files to decrypt: {}".format(path, 
+            ' | '.join(sorted(textfiles))))
+
+        f = input(
+            "Enter the name of the file you want to decrypt (leave blank if you want to decrypt every file): "
+        )
+        key = input(
+            "Enter the 6-char key, please (leave blank if you do not know the key): "
+        )
+
+        start = time.time()
+
+        fa = FA()
+        if not f:
+            for file in textfiles:
+                encrypted_file = fa.initfile(file)
+
+                if not key:
+                    key = fa.analysefrequencyandgetkey(encrypted_file)
+
+                text = []
+                for char, keyletter in zip(encrypted_file, cycle(key)):
+                    text += chr(ord(char) ^ ord(keyletter))
+
+                WriteInFileFunctions = FileFunction("DECRYPTED/decrypted_" +
+                                                    file)
+                decrypted_file = WriteInFileFunctions.writeinfile(
+                    ''.join(text))
+
+        else:
+            encrypted_file = fa.initfile(f)
+
+            if not key:
+                key = fa.analysefrequencyandgetkey(encrypted_file)
+
+            text = []
+            for char, keyletter in zip(encrypted_file, cycle(key)):
+                text += chr(ord(char) ^ ord(keyletter))
+
+            WriteInFileFunctions = FileFunction("DECRYPTED/decrypted_" + f)
+            decrypted_file = WriteInFileFunctions.writeinfile(''.join(text))
+
+        end = time.time()
+        print("All files decrypted in {} seconds ! The key was > {} <".format(
+            round(end - start, 2), key))

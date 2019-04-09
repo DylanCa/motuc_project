@@ -4,18 +4,16 @@ from pathlib import Path
 
 
 class FileFunction():
+    path = "../encrypted_files/"
     filepath = ''
     encoding = "iso8859_1"
 
     def __init__(self, filepath):
-        self.filepath = filepath
+        self.filepath = self.path + filepath
 
     def openfile(self):
         f = codecs.open(
-            Path("../../encrypted_files/", self.filepath),
-            "r",
-            encoding=self.encoding,
-            errors='ignore')
+            Path(self.filepath), "r", encoding=self.encoding, errors='ignore')
         fr = f.read()
         f.close()
         return fr
@@ -27,8 +25,5 @@ class FileFunction():
 
     def writeinfile(self, text):
         f = codecs.open(
-            Path("../../encrypted_files/", self.filepath),
-            "w",
-            encoding=self.encoding,
-            errors='ignore')
+            Path(self.filepath), "w", encoding=self.encoding, errors='ignore')
         f.write(text)
