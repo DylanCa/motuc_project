@@ -35,6 +35,7 @@ class Decryptor():
         start = time.time()
 
         fa = FA()
+        collisions = Collisions()
         keysize = None
 
         if not f:
@@ -65,7 +66,7 @@ class Decryptor():
 
                 print(
                     "There's a {}% match for the file {} with the key > {} <!".
-                    format(Collisions(text).checkcolissions(), file, key))
+                    format(collisions.checkcollisions(text), file, key))
                 key = ''
 
         else:
@@ -92,7 +93,7 @@ class Decryptor():
             decrypted_file = WriteInFileFunctions.writeinfile(''.join(text))
 
             print("There's a {}% match for the file {} with the key > {} <!".
-                  format(Collisions(text).checkcolissions(), f, key))
+                  format(collisions.checkcollisions(text), f, key))
 
         end = time.time()
         print("All files decrypted in {} seconds !".format(
@@ -106,7 +107,8 @@ class Decryptor():
         else:
             fa = FA()
             self.keysize = keysize
-            self.key = fa.analysefrequencyandgetkey(textfile, int(self.keysize))
+            self.key = fa.analysefrequencyandgetkey(textfile,
+                                                    int(self.keysize))
 
         self.filename = filename
         self.textfile = textfile
