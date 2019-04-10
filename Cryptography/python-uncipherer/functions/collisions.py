@@ -1,21 +1,18 @@
-from functions.filefunctions import FileFunction
+from functions.filefunctions import FileFunction as FA
 import re
 
 
 class Collisions():
 
-    frenchdict = "liste_francais.txt"
+    frenchdict = FA("liste_francais.txt").openfile()
 
-    def __init__(self, file):
-        self.file = file
-
-    def checkcolissions(self):
+    def checkcollisions(self, file):
 
         counter = 0
         match = 0
-        for word in self.file:
+        for word in file:
             counter += 1
-            if re.sub(r'\W+', '', word) in self.frenchdict:
+            if self.frenchdict.find(word) is not -1:
                 match += 1
 
         return round(match / counter * 100)
