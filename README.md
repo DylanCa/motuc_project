@@ -105,4 +105,4 @@ And finally, we did a **Collision Check** with the French Dictionnary to be sure
 - [Julien Mazzia](https://github.com/julienmazzia)
 - [Ludwig Maurin-Jollis--Gally](https://github.com/Lmaurinjollis)
 - [Roberto Leon Montes](https://github.com/RobertoLeonMontes)
-- Pierre-Laurent Cristille (Github link coming Soon)
+- [Pierre-Laurent Cristille](https://github.com/Pierre-LaurentC)
